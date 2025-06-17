@@ -122,11 +122,29 @@
       document.getElementById("phoneResult").textContent = result;
     }
 
+   const names = [
+      "Eva", "Janet", "Ulya", "Maida", "Unjani", "Zelda", "Raisa", "Yulia", "Nurul", "Talia",
+      "Rika", "Devi", "Clara", "Zalindra", "Maya", "Cornelia", "Pia", "Azalea", "Paris", "Ophelia",
+      "Irma", "Malika", "Ayu", "Zaenab", "Sakura", "Zamira", "Farhunnisa", "Uchita", "Elisa", "Mila",
+      "Gawati", "Lintang", "Laila", "Dalima", "Nilam", "Najwa", "Ani", "Puput", "Indah", "Ajeng",
+      "Anita", "Samiah", "Amelia", "Wulan", "Kezia", "Elvina", "Safitri", "Keisha", "Hafshah",
+      "Rahmawati", "Laksmiwati", "Yolanda", "Anastasia", "Usada", "Wulandari", "Namaga", "Hasanah",
+      "Mardhiyah", "Diana", "Kayla", "Yuniar", "Jasmin", "Olivia", "Kuswandari", "Rina", "Maimunah",
+      "Zulaika", "Ira", "Febi", "Michelle", "Umayahh", "Hariyah", "Halimah", "Puspasari", "Ida",
+      "Salwa", "Suryatmi", "Permata", "Fitria", "Nasyiah", "Oktaviani", "Haryanti", "Mayasari",
+      "Jane", "Hastuti", "Mulyani", "Astuti", "Mela", "Adibah", "Eka", "Atikhah", "Kiki", "Sutarni",
+      "Kristina", "Avi", "Ika", "Suprapti", "Erny", "Kus", "Eryna", "Herni", "Cahya", "Zullaeha",
+      "Rita", "Ristanti", "Anis", "Dinar", "Desi", "Rena", "Dini", "Afrianti", "Restu", "Tri",
+      "Hasapy", "Galih", "Titis", "Nirma", "Dana", "Malinda", "Ismawati", "Anisak", "Wibi", "Penik",
+      "Debrina", "Enno", "Ichwani", "Trimurtiningsih", "Putri", "Erni", "Lisa"
+    ];
+
     function generateName() {
-      const name1 = nameList[Math.floor(Math.random() * nameList.length)];
-      const name2 = nameList[Math.floor(Math.random() * nameList.length)];
-      const name3 = nameList[Math.floor(Math.random() * nameList.length)];
-      document.getElementById("nameResult").textContent = `${name1} ${name2} ${name3}`;
+      let name = [];
+      for (let i = 0; i < 3; i++) {
+        name.push(names[Math.floor(Math.random() * names.length)]);
+      }
+      document.getElementById("nameResult").innerText = "" + name.join(" ");
     }
 
     function generateAge() {
