@@ -28,12 +28,43 @@
       text-align: center;
       padding: 20px;
     }
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
+   body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #f0f0f0;
+  padding: 20px;
+  margin: 0;
+}
+.header {
+  display: flex;
+  align-items: center;
+  background: #1e1e1e;
+  padding: 15px 20px;
+  border-bottom: 2px solid #673ab7;
+}
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-bottom: 2px solid #673ab7;
+  background: #1e1e1e;
+}
+nav button {
+  background: #333;
+  border: 1px solid #555;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
     .box {
       background: #1e1e1e;
       padding: 20px;
@@ -77,19 +108,15 @@
       margin-top: 10px;
       font-style: italic;
     }
-    nav {
-      margin-bottom: 30px;
-    }
-    nav button {
-      background: #333;
-      border: 1px solid #555;
-    }
+
   </style>
 </head>
 <body>
+  <div class="header">
+    <div class="logo">🔷 DiGumilang</div>
+  </div>
 
-  <div class="logo">🔷 DiGumilang</div>
-  <h2>🔢 Generator Nama, Nomor Telepon, Umur & TempMail</h2>
+  <h2 style="text-align:center;">🔢 Generator Nama, Nomor Telepon & Umur</h2>
 
   <nav>
     <button onclick="document.getElementById('phone').scrollIntoView({behavior:'smooth'})">Nomor Telepon Indonesia</button>
