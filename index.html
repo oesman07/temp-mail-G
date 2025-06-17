@@ -21,58 +21,19 @@
   <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEREREAAAAAERERERAAAAERAAABEQAAAREAAAERAAABEQAAAREAAAERAQABEQAAAREBEAERAAABEQERERAAAAERARERAAAAAREAAAAAAAABEQAAAAEAAAEREREREQAAABEREREQAAAAAAAAAAAAD//wAA//8AAOAfAADgDwAAx8cAAMfHAADHxwAAxccAAMTHAADEDwAAxB8AAMf/AADH9wAAwAcAAOAPAAD//wAA" rel="icon" type="image/x-icon">
 
   <style>
- 
-   body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #121212;
-  color: #f0f0f0;
-  padding: 20px;
-  margin: 0;
-}
-.header {
-  display: flex;
-  align-items: center;
-  background: #1e1e1e;
-  padding: 15px 20px;
-  border-bottom: 2px solid #673ab7;
-}
-nav {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 20px 20px;
-  background: #1e1e1e;
-  border-bottom: 2px solid #673ab7;
-}
-
-.logo {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #ffffff;
-  margin-right: 20px;
-}
-
-.nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  flex: 1;
-}
-
-nav button {
-  background: #333;
-  border: 1px solid #555;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
     .box {
       background: #1e1e1e;
       padding: 20px;
@@ -116,21 +77,27 @@ nav button {
       margin-top: 10px;
       font-style: italic;
     }
-
+    nav {
+      margin-bottom: 30px;
+    }
+    nav button {
+      background: #333;
+      border: 1px solid #555;
+    }
   </style>
 </head>
 <body>
-  <nav>
     <div class="logo">🔷 DiGumilang</div>
-    <div class="nav-buttons">
-      <button onclick="document.getElementById('phone').scrollIntoView({behavior:'smooth'})">Nomor Telepon Indonesia</button>
-      <button onclick="document.getElementById('name').scrollIntoView({behavior:'smooth'})">Nama Perempuan Acak</button>
-      <button onclick="document.getElementById('age').scrollIntoView({behavior:'smooth'})">Umur Acak (18 - 45)</button>
-    </div>
-  </nav>
 
-  <h2 style="text-align:center;">🔢 Generator Nama, Nomor Telepon, Umur & TempMail</h2>
-  <div class="box" id="phone">
+  <h2>🔢 Generator Nama, Nomor Telepon & Umur</h2>
+
+  <div class="nav">
+    <button onclick="document.getElementById('phoneSection').scrollIntoView({ behavior: 'smooth' })">📞 Nomor Telepon Indonesia</button>
+    <button onclick="document.getElementById('nameSection').scrollIntoView({ behavior: 'smooth' })">👧 Nama Perempuan Acak</button>
+    <button onclick="document.getElementById('ageSection').scrollIntoView({ behavior: 'smooth' })">🎂 Umur Acak (18 - 45)</button>
+  </div>
+
+  <div class="box" id="phoneSection">
     <h3>📞 Nomor Telepon Indonesia</h3>
     <p>Masukkan 4 angka awal (contoh: 0812)</p>
     <input type="text" id="prefix" maxlength="4" placeholder="0812">
@@ -139,23 +106,24 @@ nav button {
     <button onclick="copyText('phoneResult')">📋 Salin Nomor</button>
   </div>
 
-  <div class="box" id="name">
+  <div class="box" id="nameSection">
     <h3>👧 Nama Perempuan Acak</h3>
     <button onclick="generateName()">🎲 Buat Nama</button>
     <div class="result" id="nameResult"></div>
     <button onclick="copyText('nameResult')">📋 Salin Nama</button>
   </div>
 
-  <div class="box" id="age">
+  <div class="box" id="ageSection">
     <h3>🎂 Umur Acak (18 - 45)</h3>
     <button onclick="generateAge()">🔁 Buat Umur</button>
     <div class="result" id="ageResult"></div>
     <button onclick="copyText('ageResult')">📋 Salin Umur</button>
   </div>
 
- 
+
   <script>
-    const nameList = [...Array.from(document.querySelectorAll('script'))[0].textContent.match(/"([^"]+)"/g).map(n => n.replace(/"/g, ''))];
+    const nameList = [...Array.from(document.querySelectorAll('script'))[0].textContent.match(/\"([^\"]+)\"/g).map(n => n.replace(/\"/g, ''))];
+
     const domains = ["@mailnesia.com", "@examplemail.com", "@tempmail.io", "@fakemail.net"];
 
     function generatePhone() {
@@ -171,7 +139,7 @@ nav button {
       document.getElementById("phoneResult").textContent = result;
     }
 
-   const names = [
+        const names = [
       "Eva", "Janet", "Ulya", "Maida", "Unjani", "Zelda", "Raisa", "Yulia", "Nurul", "Talia",
       "Rika", "Devi", "Clara", "Zalindra", "Maya", "Cornelia", "Pia", "Azalea", "Paris", "Ophelia",
       "Irma", "Malika", "Ayu", "Zaenab", "Sakura", "Zamira", "Farhunnisa", "Uchita", "Elisa", "Mila",
@@ -179,7 +147,7 @@ nav button {
       "Anita", "Samiah", "Amelia", "Wulan", "Kezia", "Elvina", "Safitri", "Keisha", "Hafshah",
       "Rahmawati", "Laksmiwati", "Yolanda", "Anastasia", "Usada", "Wulandari", "Namaga", "Hasanah",
       "Mardhiyah", "Diana", "Kayla", "Yuniar", "Jasmin", "Olivia", "Kuswandari", "Rina", "Maimunah",
-      "Zulaika", "Ira", "Febi", "Michelle", "Umayahh", "Hariyah", "Halimah", "Puspasari", "Ida",
+      "Zulaika", "Ira", "Febi", "Michelle", "Usamah", "Hariyah", "Halimah", "Puspasari", "Ida",
       "Salwa", "Suryatmi", "Permata", "Fitria", "Nasyiah", "Oktaviani", "Haryanti", "Mayasari",
       "Jane", "Hastuti", "Mulyani", "Astuti", "Mela", "Adibah", "Eka", "Atikhah", "Kiki", "Sutarni",
       "Kristina", "Avi", "Ika", "Suprapti", "Erny", "Kus", "Eryna", "Herni", "Cahya", "Zullaeha",
@@ -195,12 +163,10 @@ nav button {
       }
       document.getElementById("nameResult").innerText = "" + name.join(" ");
     }
-
     function generateAge() {
       const age = Math.floor(Math.random() * (45 - 18 + 1)) + 18;
-      document.getElementById("ageResult").textContent = age + " tahun";
+      document.getElementById("ageResult").textContent = age + "";
     }
-
     function generateTempMail() {
       const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
       let username = "";
