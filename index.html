@@ -1,1 +1,169 @@
-{"name": "temp_generator_combo_v2", "type": "code/html", "content": "<!DOCTYPE html>\n<html>\n<head>\n <meta charset="UTF-8">\n <title>DiGumilang Generator</title>\n <style>\n body {\n font-family: Arial, sans-serif;\n background: #121212;\n color: #f0f0f0;\n text-align: center;\n padding: 20px;\n }\n .logo {\n font-size: 1.5em;\n font-weight: bold;\n color: #ffffff;\n margin-bottom: 10px;\n }\n .box {\n background: #1e1e1e;\n padding: 20px;\n border-radius: 8px;\n box-shadow: 0 2px 8px rgba(0,0,0,0.5);\n display: inline-block;\n margin-bottom: 20px;\n width: 90%;\n max-width: 700px;\n }\n input[type=text] {\n padding: 8px;\n margin: 5px;\n width: 200px;\n border-radius: 5px;\n border: 1px solid #555;\n background: #2a2a2a;\n color: #fff;\n }\n button {\n background: #673ab7;\n color: white;\n border: none;\n padding: 10px 15px;\n border-radius: 6px;\n cursor: pointer;\n margin: 5px;\n }\n .result {\n font-size: 1.2em;\n margin-top: 15px;\n word-wrap: break-word;\n }\n .preview-box {\n background: #2a2a2a;\n padding: 10px;\n border-radius: 5px;\n margin-top: 10px;\n font-style: italic;\n text-align: left;\n }\n nav {\n margin-bottom: 30px;\n }\n nav button {\n background: #333;\n border: 1px solid #555;\n }\n </style>\n</head>\n<body>\n <div class="logo">🔷 DiGumilang</div>\n <h2>🔢 Generator Data: Nama, Nomor, Umur, TempMail</h2>\n\n <nav>\n <button onclick="document.getElementById('phone').scrollIntoView({behavior:'smooth'})">Nomor Telepon Indonesia</button>\n <button onclick="document.getElementById('name').scrollIntoView({behavior:'smooth'})">Nama Perempuan Acak</button>\n <button onclick="document.getElementById('age').scrollIntoView({behavior:'smooth'})">Umur Acak</button>\n <button onclick="document.getElementById('tempmail').scrollIntoView({behavior:'smooth'})">TempMail Generator</button>\n </nav>\n\n <div class="box" id="phone">\n <h3>📞 Nomor Telepon Indonesia</h3>\n <p>Masukkan 4 angka awal (misal: 0812)</p>\n <input type="text" id="prefix" maxlength="4" placeholder="0812">\n <button onclick="generatePhone()">🔁 Buat Nomor</button>\n <div class="result" id="phoneResult"></div>\n <button onclick="copyText('phoneResult')">📋 Salin Nomor</button>\n </div>\n\n <div class="box" id="name">\n <h3>👧 Nama Perempuan Acak</h3>\n <button onclick="generateName()">🎲 Buat Nama</button>\n <div class="result" id="nameResult"></div>\n <button onclick="copyText('nameResult')">📋 Salin Nama</button>\n </div>\n\n <div class="box" id="age">\n <h3>🎂 Umur Acak (18 - 45)</h3>\n <button onclick="generateAge()">🔁 Buat Umur</button>\n <div class="result" id="ageResult"></div>\n <button onclick="copyText('ageResult')">📋 Salin Umur</button>\n </div>\n\n <div class="box" id="tempmail">\n <h3>📧 TempMail Generator</h3>\n <button onclick="generateTempMail()">📩 Buat Email</button>\n <button onclick="checkInbox()">🔃 Cek Inbox</button>\n <div class="result" id="emailResult"></div>\n <button onclick="copyText('emailResult')">📋 Salin Email</button>\n <div class="preview-box" id="emailPreview">(Belum ada pesan)</div>\n <div id="emailList" class="preview-box"></div>\n <div id="emailBody" class="preview-box" style="white-space: pre-wrap;"></div>\n </div>\n\n <script>\n const nameList = ["Eva","Janet","Ulya","Maida","Unjani","Zelda","Raisa","Yulia","Nurul","Talia","Rika","Devi","Clara","Zalindra","Maya","Cornelia","Pia","Azalea","Paris","Ophelia","Irma","Malika","Ayu","Zaenab","Sakura","Zamira","Farhunnisa","Uchita","Elisa","Mila","Gawati","Lintang","Laila","Dalima","Nilam","Najwa","Ani","Puput","Indah","Ajeng","Anita","Samiah","Amelia","Wulan","Kezia","Elvina","Safitri","Keisha","Hafshah","Rahmawati","Laksmiwati","Yolanda","Anastasia","Usada","Wulandari","Namaga","Hasanah","Mardhiyah","Diana","Kayla","Yuniar","Jasmin","Olivia","Kuswandari","Rina","Maimunah","Zulaika","Ira","Febi","Michelle","Usamah","Hariyah","Halimah","Puspasari","Ida","Salwa","Suryatmi","Permata","Fitria","Nasyiah","Oktaviani","Haryanti","Mayasari","Jane","Hastuti","Mulyani","Astuti","Mela","Adibah","Eka","Atikhah","Kiki","Sutarni","Kristina","Avi","Ika","Suprapti","Erny","Kus","Eryna","Herni","Cahya","Zullaeha","Rita","Ristanti","Anis","Dinar","Desi","Rena","Dini","Afrianti","Restu","Tri","Happy","Galih","Titis","Nirma","Dana","Malinda","Ismawati","Anisak","Wibi","Penik","Erlita","Nimas","Noni","Debrina","Enno","Ichwani","Trimurtiningsih","Putri","Erni"];\n const domains = ["1secmail.com", "1secmail.org"];\n let tempUsername = "";\n let tempDomain = "";\n\n function generatePhone() {\n const prefix = document.getElementById("prefix").value;\n if (prefix.length !== 4 || isNaN(prefix)) {\n alert("Masukkan 4 angka awal yang valid!");\n return;\n }\n let result = prefix;\n for (let i = 0; i < 8; i++) {\n result += Math.floor(Math.random() * 10);\n }\n document.getElementById("phoneResult").textContent = result;\n }\n\n function generateName() {\n const name1 = nameList[Math.floor(Math.random() * nameList.length)];\n const name2 = nameList[Math.floor(Math.random() * nameList.length)];\n const name3 = nameList[Math.floor(Math.random() * nameList.length)];\n document.getElementById("nameResult").textContent = ${name1} ${name2} ${name3};\n }\n\n function generateAge() {\n const age = Math.floor(Math.random() * (45 - 18 + 1)) + 18;\n document.getElementById("ageResult").textContent = age + " tahun";\n }\n\n function generateTempMail() {\n const chars = "abcdefghijklmnopqrstuvwxyz0123456789";\n let username = "";\n for (let i = 0; i < 10; i++) {\n username += chars[Math.floor(Math.random() * chars.length)];\n }\n tempUsername = username;\n tempDomain = domains[Math.floor(Math.random() * domains.length)];\n const email = ${tempUsername}@${tempDomain};\n document.getElementById("emailResult").textContent = email;\n document.getElementById("emailPreview").textContent = "(Email belum digunakan, belum ada pesan masuk)";\n document.getElementById("emailList").innerHTML = "";\n document.getElementById("emailBody").innerHTML = "";\n }\n\n function checkInbox() {\n if (!tempUsername) {\n alert("Buat email dulu!");\n return;\n }\n\n const emailListDiv = document.getElementById("emailList");\n const emailBodyDiv = document.getElementById("emailBody");\n emailListDiv.innerHTML = '';\n emailBodyDiv.innerHTML = '';\n document.getElementById("emailPreview").textContent = "Memeriksa kotak masuk...";\n\n fetch(https://www.1secmail.com/api/v1/?action=getMessages&login=${tempUsername}&domain=${tempDomain})\n .then(res => res.json())\n .then(data => {\n if (data.length === 0) {\n document.getElementById("emailPreview").textContent = "(Belum ada pesan masuk)";\n return;\n }\n\n document.getElementById("emailPreview").textContent = 📬 ${data.length} pesan diterima:;\n\n data.forEach(msg => {\n const item = document.createElement("div");\n item.innerHTML = \n <strong>📧 ${msg.from}</strong><br>\n 📝 ${msg.subject}<br>\n <button onclick=\"readMessage(${msg.id})\">📖 Baca Pesan</button><hr>;\n emailListDiv.appendChild(item);\n });\n })\n .catch(() => {\n document.getElementById("emailPreview").textContent = "Gagal memuat pesan.";\n });\n }\n\n function readMessage(id) {\n const emailBodyDiv = document.getElementById("emailBody");\n emailBodyDiv.innerHTML = "Memuat isi pesan...";\n\n fetch(https://www.1secmail.com/api/v1/?action=readMessage&login=${tempUsername}&domain=${tempDomain}&id=${id})\n .then(res => res.json())\n .then(data => {\n const content = \n🔹 Dari: ${data.from}\n🔹 Subjek: ${data.subject}\n🔹 Tanggal: ${data.date}\n🔸 Pesan:\n${data.textBody || \"(Kosong)\"};\n emailBodyDiv.textContent = content;\n })\n .catch(() => {\n emailBodyDiv.textContent = "Gagal membaca isi pesan.";\n });\n }\n\n function copyText(id) {\n const text = document.getElementById(id).textContent;\n navigator.clipboard.writeText(text).then(() => {\n alert("Disalin ke clipboard!");\n });\n }\n </script>\n</body>\n</html>"}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Generator Data Indonesia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      display: inline-block;
+      margin-bottom: 20px;
+      width: 90%;
+      max-width: 700px;
+    }
+    input[type=text] {
+      padding: 8px;
+      margin: 5px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid #555;
+      background: #2a2a2a;
+      color: #fff;
+    }
+    button {
+      background: #673ab7;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .result {
+      font-size: 1.2em;
+      margin-top: 15px;
+      word-wrap: break-word;
+    }
+    .email-box {
+      margin-top: 10px;
+    }
+    .preview-box {
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    nav {
+      margin-bottom: 30px;
+    }
+    nav button {
+      background: #333;
+      border: 1px solid #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">🔷 DiGumilang</div>
+  <h2>🔢 Generator Nama, Nomor Telepon, Umur & TempMail</h2>
+
+  <nav>
+    <button onclick="document.getElementById('phone').scrollIntoView({behavior:'smooth'})">Nomor Telepon Indonesia</button>
+    <button onclick="document.getElementById('name').scrollIntoView({behavior:'smooth'})">Nama Perempuan Acak</button>
+    <button onclick="document.getElementById('age').scrollIntoView({behavior:'smooth'})">Umur Acak (18 - 45)</button>
+    <button onclick="document.getElementById('tempmail').scrollIntoView({behavior:'smooth'})">TempMail Generator</button>
+  </nav>
+
+  <div class="box" id="phone">
+    <h3>📞 Nomor Telepon Indonesia</h3>
+    <p>Masukkan 4 angka awal (contoh: 0812)</p>
+    <input type="text" id="prefix" maxlength="4" placeholder="0812">
+    <button onclick="generatePhone()">🔁 Buat Nomor</button>
+    <div class="result" id="phoneResult"></div>
+    <button onclick="copyText('phoneResult')">📋 Salin Nomor</button>
+  </div>
+
+  <div class="box" id="name">
+    <h3>👧 Nama Perempuan Acak</h3>
+    <button onclick="generateName()">🎲 Buat Nama</button>
+    <div class="result" id="nameResult"></div>
+    <button onclick="copyText('nameResult')">📋 Salin Nama</button>
+  </div>
+
+  <div class="box" id="age">
+    <h3>🎂 Umur Acak (18 - 45)</h3>
+    <button onclick="generateAge()">🔁 Buat Umur</button>
+    <div class="result" id="ageResult"></div>
+    <button onclick="copyText('ageResult')">📋 Salin Umur</button>
+  </div>
+
+ 
+  <script>
+    const nameList = [...Array.from(document.querySelectorAll('script'))[0].textContent.match(/"([^"]+)"/g).map(n => n.replace(/"/g, ''))];
+    const domains = ["@mailnesia.com", "@examplemail.com", "@tempmail.io", "@fakemail.net"];
+
+    function generatePhone() {
+      const prefix = document.getElementById("prefix").value;
+      if (prefix.length !== 4 || isNaN(prefix)) {
+        alert("Masukkan 4 angka awal yang valid!");
+        return;
+      }
+      let result = prefix;
+      for (let i = 0; i < 8; i++) {
+        result += Math.floor(Math.random() * 10);
+      }
+      document.getElementById("phoneResult").textContent = result;
+    }
+
+    function generateName() {
+      const name1 = nameList[Math.floor(Math.random() * nameList.length)];
+      const name2 = nameList[Math.floor(Math.random() * nameList.length)];
+      const name3 = nameList[Math.floor(Math.random() * nameList.length)];
+      document.getElementById("nameResult").textContent = `${name1} ${name2} ${name3}`;
+    }
+
+    function generateAge() {
+      const age = Math.floor(Math.random() * (45 - 18 + 1)) + 18;
+      document.getElementById("ageResult").textContent = age + " tahun";
+    }
+
+    function generateTempMail() {
+      const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+      let username = "";
+      for (let i = 0; i < 10; i++) {
+        username += chars[Math.floor(Math.random() * chars.length)];
+      }
+      const domain = domains[Math.floor(Math.random() * domains.length)];
+      const email = username + domain;
+      document.getElementById("emailResult").textContent = email;
+      document.getElementById("emailPreview").textContent = "(Email belum digunakan, tidak ada pesan masuk)";
+    }
+
+    function refreshInbox() {
+      const messages = [
+        "(Belum ada pesan baru)",
+        "Selamat! Anda mendapatkan voucher belanja.",
+        "Konfirmasi pendaftaran akun berhasil.",
+        "Undangan webinar gratis minggu ini.",
+        "Email masuk belum tersedia."
+      ];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("emailPreview").textContent = randomMessage;
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Disalin ke clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
