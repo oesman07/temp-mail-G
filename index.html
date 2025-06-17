@@ -121,18 +121,20 @@
     <button onclick="copyText('ageResult')">📋 Salin Umur</button>
   </div>
 
-    <div class="box" id="emailSection">
-    <h3>📧 TempMail Generator</h3>
-    <button onclick="generateTempMail()">📩 Buat Email</button>
-    <button onclick="generateTempMail()">🔄 Refresh Email</button>
-    <div class="result email-box">
-      <span id="emailResult"></span>
-      <br>
-      <button onclick="copyText('emailResult')">📋 Salin Email</button>
-    </div>
-    <div class="preview-box" id="emailPreview">(Email belum digunakan, tidak ada pesan masuk)</div>
-    <button onclick="refreshInbox()">🔃 Periksa Kotak Masuk</button>
+    <div class="box" id="tempmail">
+  <h3>📧 TempMail Generator</h3>
+  <button onclick="generateTempMail()">📩 Buat Email</button>
+  <button onclick="checkInbox()">🔄 Refresh Email</button>
+  <div class="result email-box">
+    <span id="emailResult"></span>
+    <br>
+    <button onclick="copyText('emailResult')">📋 Salin Email</button>
   </div>
+<div class="preview-box" id="emailPreview">(Belum ada pesan)</div>
+<div id="emailList" class="preview-box"></div>
+<div id="emailBody" class="preview-box" style="white-space: pre-wrap;"></div>
+</div>
+
 
   <script>
     const nameList = [...Array.from(document.querySelectorAll('script'))[0].textContent.match(/\"([^\"]+)\"/g).map(n => n.replace(/\"/g, ''))];
@@ -211,5 +213,95 @@
       });
     }
   </script>
+  <script>
+  let tempUsername = '';
+  let tempDomain = '1secmail.com';
+
+  function generateTempMail() {
+    const chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+    tempUsername = '';
+    for (let i = 0; i < 10; i++) {
+      tempUsername += chars[Math.floor(Math.random() * chars.length)];
+    }
+    const email = `${tempUsername}@${tempDomain}`;
+    document.getElementById("emailResult").textContent = email;
+    document.getElementById("emailPreview").textContent = "(Belum ada pesan)";
+  }
+
+function checkInbox() {
+  if (!tempUsername) {
+    alert("Buat email dulu!");
+    return;
+  }
+
+  const emailListDiv = document.getElementById("emailList");
+  const emailBodyDiv = document.getElementById("emailBody");
+  emailListDiv.innerHTML = '';
+  emailBodyDiv.innerHTML = '';
+  document.getElementById("emailPreview").textContent = "Memeriksa kotak masuk...";
+
+  fetch(`https://www.1secmail.com/api/v1/?action=getMessages&login=${tempUsername}&domain=${tempDomain}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.length === 0) {
+        document.getElementById("emailPreview").textContent = "(Belum ada pesan masuk)";
+        return;
+      }
+
+      document.getElementById("emailPreview").textContent = `📬 ${data.length} pesan diterima:`;
+      
+      data.forEach(msg => {
+        const item = document.createElement("div");
+        item.innerHTML = `
+          <strong>📧 ${msg.from}</strong><br>
+          📝 ${msg.subject}<br>
+          <button onclick="readMessage(${msg.id})">📖 Baca Pesan</button><hr>`;
+        emailListDiv.appendChild(item);
+      });
+    })
+    .catch(() => {
+      document.getElementById("emailPreview").textContent = "Gagal memuat pesan.";
+    });
+}
+
+    function readMessage(id) {
+  const emailBodyDiv = document.getElementById("emailBody");
+  emailBodyDiv.innerHTML = "Memuat isi pesan...";
+
+  fetch(`https://www.1secmail.com/api/v1/?action=readMessage&login=${tempUsername}&domain=${tempDomain}&id=${id}`)
+    .then(res => res.json())
+    .then(data => {
+      const content = `
+        🔹 Dari: ${data.from}
+        🔹 Subjek: ${data.subject}
+        🔹 Tanggal: ${data.date}
+        🔸 Pesan:
+        ${data.textBody || "(Kosong)"}
+      `;
+      emailBodyDiv.textContent = content;
+    })
+    .catch(() => {
+      emailBodyDiv.textContent = "Gagal membaca isi pesan.";
+    });
+}
+
+
+    fetch(`https://www.1secmail.com/api/v1/?action=getMessages&login=${tempUsername}&domain=${tempDomain}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.length === 0) {
+          document.getElementById("emailPreview").textContent = "(Belum ada pesan masuk)";
+        } else {
+          const message = data[0];
+          document.getElementById("emailPreview").textContent =
+            `📬 Dari: ${message.from}\n📌 Subjek: ${message.subject}`;
+        }
+      })
+      .catch(() => {
+        document.getElementById("emailPreview").textContent = "Gagal menghubungi server.";
+      });
+  }
+</script>
+
 </body>
 </html>
