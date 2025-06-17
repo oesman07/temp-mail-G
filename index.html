@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <title>Generator Data Indonesia</title>
+  <!-- SEO Tags -->
+  <meta name="description" content="Generator acak nomor HP Indonesia, nama perempuan 3 kata, dan umur 18-45 tahun. Gratis dan mudah digunakan." />
+  <meta name="keywords" content="generator nomor hp, nama perempuan indonesia, umur acak, web gratis, nomor indonesia random" />
+  <meta name="author" content="Usman Iryanto" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph untuk dibaca Google dan Sosial Media -->
+  <meta property="og:title" content="Generator Nomor, Nama & Umur Indonesia" />
+  <meta property="og:description" content="Buat nomor telepon acak, nama perempuan 3 kata, dan umur 18-45 tahun hanya dengan satu klik." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://digumilang.blogspot.com/" />
+  <!-- Ganti dengan link situs kamu -->
+
+  <!-- Favicon (opsional) -->
+  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEREREAAAAAERERERAAAAERAAABEQAAAREAAAERAAABEQAAAREAAAERAQABEQAAAREBEAERAAABEQERERAAAAERARERAAAAAREAAAAAAAABEQAAAAEAAAEREREREQAAABEREREQAAAAAAAAAAAAD//wAA//8AAOAfAADgDwAAx8cAAMfHAADHxwAAxccAAMTHAADEDwAAxB8AAMf/AADH9wAAwAcAAOAPAAD//wAA" rel="icon" type="image/x-icon">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      display: inline-block;
+      margin-bottom: 20px;
+      width: 90%;
+      max-width: 700px;
+    }
+    input[type=text] {
+      padding: 8px;
+      margin: 5px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid #555;
+      background: #2a2a2a;
+      color: #fff;
+    }
+    button {
+      background: #673ab7;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .result {
+      font-size: 1.2em;
+      margin-top: 15px;
+      word-wrap: break-word;
+    }
+    .email-box {
+      margin-top: 10px;
+    }
+    .preview-box {
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    nav {
+      margin-bottom: 30px;
+    }
+    nav button {
+      background: #333;
+      border: 1px solid #555;
+    }
+  </style>
+</head>
+<body>
+    <div class="logo">🔷 DiGumilang</div>
+
+  <h2>🔢 Generator Nama, Nomor Telepon, Umur & TempMail</h2>
+
+  <div class="nav">
+    <button onclick="document.getElementById('phoneSection').scrollIntoView({ behavior: 'smooth' })">📞 Nomor Telepon Indonesia</button>
+    <button onclick="document.getElementById('nameSection').scrollIntoView({ behavior: 'smooth' })">👧 Nama Perempuan Acak</button>
+    <button onclick="document.getElementById('ageSection').scrollIntoView({ behavior: 'smooth' })">🎂 Umur Acak (18 - 45)</button>
+    <button onclick="document.getElementById('emailSection').scrollIntoView({ behavior: 'smooth' })">📧 TempMail Generator</button>
+  </div>
+
+  <div class="box" id="phoneSection">
+    <h3>📞 Nomor Telepon Indonesia</h3>
+    <p>Masukkan 4 angka awal (contoh: 0812)</p>
+    <input type="text" id="prefix" maxlength="4" placeholder="0812">
+    <button onclick="generatePhone()">🔁 Buat Nomor</button>
+    <div class="result" id="phoneResult"></div>
+    <button onclick="copyText('phoneResult')">📋 Salin Nomor</button>
+  </div>
+
+  <div class="box" id="nameSection">
+    <h3>👧 Nama Perempuan Acak</h3>
+    <button onclick="generateName()">🎲 Buat Nama</button>
+    <div class="result" id="nameResult"></div>
+    <button onclick="copyText('nameResult')">📋 Salin Nama</button>
+  </div>
+
+  <div class="box" id="ageSection">
+    <h3>🎂 Umur Acak (18 - 45)</h3>
+    <button onclick="generateAge()">🔁 Buat Umur</button>
+    <div class="result" id="ageResult"></div>
+    <button onclick="copyText('ageResult')">📋 Salin Umur</button>
+  </div>
+
+    <div class="box" id="emailSection">
+    <h3>📧 TempMail Generator</h3>
+    <button onclick="generateTempMail()">📩 Buat Email</button>
+    <button onclick="generateTempMail()">🔄 Refresh Email</button>
+    <div class="result email-box">
+      <span id="emailResult"></span>
+      <br>
+      <button onclick="copyText('emailResult')">📋 Salin Email</button>
+    </div>
+    <div class="preview-box" id="emailPreview">(Email belum digunakan, tidak ada pesan masuk)</div>
+    <button onclick="refreshInbox()">🔃 Periksa Kotak Masuk</button>
+  </div>
+
+  <script>
+    const nameList = [...Array.from(document.querySelectorAll('script'))[0].textContent.match(/\"([^\"]+)\"/g).map(n => n.replace(/\"/g, ''))];
+
+    const domains = ["@mailnesia.com", "@examplemail.com", "@tempmail.io", "@fakemail.net"];
+
+    function generatePhone() {
+      const prefix = document.getElementById("prefix").value;
+      if (prefix.length !== 4 || isNaN(prefix)) {
+        alert("Masukkan 4 angka awal yang valid!");
+        return;
+      }
+      let result = prefix;
+      for (let i = 0; i < 8; i++) {
+        result += Math.floor(Math.random() * 10);
+      }
+      document.getElementById("phoneResult").textContent = result;
+    }
+
+        const names = [
+      "Eva", "Janet", "Ulya", "Maida", "Unjani", "Zelda", "Raisa", "Yulia", "Nurul", "Talia",
+      "Rika", "Devi", "Clara", "Zalindra", "Maya", "Cornelia", "Pia", "Azalea", "Paris", "Ophelia",
+      "Irma", "Malika", "Ayu", "Zaenab", "Sakura", "Zamira", "Farhunnisa", "Uchita", "Elisa", "Mila",
+      "Gawati", "Lintang", "Laila", "Dalima", "Nilam", "Najwa", "Ani", "Puput", "Indah", "Ajeng",
+      "Anita", "Samiah", "Amelia", "Wulan", "Kezia", "Elvina", "Safitri", "Keisha", "Hafshah",
+      "Rahmawati", "Laksmiwati", "Yolanda", "Anastasia", "Usada", "Wulandari", "Namaga", "Hasanah",
+      "Mardhiyah", "Diana", "Kayla", "Yuniar", "Jasmin", "Olivia", "Kuswandari", "Rina", "Maimunah",
+      "Zulaika", "Ira", "Febi", "Michelle", "Usamah", "Hariyah", "Halimah", "Puspasari", "Ida",
+      "Salwa", "Suryatmi", "Permata", "Fitria", "Nasyiah", "Oktaviani", "Haryanti", "Mayasari",
+      "Jane", "Hastuti", "Mulyani", "Astuti", "Mela", "Adibah", "Eka", "Atikhah", "Kiki", "Sutarni",
+      "Kristina", "Avi", "Ika", "Suprapti", "Erny", "Kus", "Eryna", "Herni", "Cahya", "Zullaeha",
+      "Rita", "Ristanti", "Anis", "Dinar", "Desi", "Rena", "Dini", "Afrianti", "Restu", "Tri",
+      "Hasapy", "Galih", "Titis", "Nirma", "Dana", "Malinda", "Ismawati", "Anisak", "Wibi", "Penik",
+      "Debrina", "Enno", "Ichwani", "Trimurtiningsih", "Putri", "Erni", "Lisa"
+    ];
+
+    function generateName() {
+      let name = [];
+      for (let i = 0; i < 3; i++) {
+        name.push(names[Math.floor(Math.random() * names.length)]);
+      }
+      document.getElementById("nameResult").innerText = "" + name.join(" ");
+    }
+    function generateAge() {
+      const age = Math.floor(Math.random() * (45 - 18 + 1)) + 18;
+      document.getElementById("ageResult").textContent = age + "";
+    }
+    function generateTempMail() {
+      const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+      let username = "";
+      for (let i = 0; i < 10; i++) {
+        username += chars[Math.floor(Math.random() * chars.length)];
+      }
+      const domain = domains[Math.floor(Math.random() * domains.length)];
+      const email = username + domain;
+      document.getElementById("emailResult").textContent = email;
+      document.getElementById("emailPreview").textContent = "(Email belum digunakan, tidak ada pesan masuk)";
+    }
+
+    function refreshInbox() {
+      const messages = [
+        "(Belum ada pesan baru)",
+        "Selamat! Anda mendapatkan voucher belanja.",
+        "Konfirmasi pendaftaran akun berhasil.",
+        "Undangan webinar gratis minggu ini.",
+        "Email masuk belum tersedia."
+      ];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("emailPreview").textContent = randomMessage;
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Disalin ke clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
