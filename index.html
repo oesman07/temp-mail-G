@@ -74,8 +74,8 @@
         <img id="img-safe" width="107" height="68" src="https://prasastiselaras.com/wp-content/uploads/2023/08/3-panah-ke-bawah-animasi-1.gif">
         <br>
       
-   
-        <a href="https://uh5f114a8buh.uewhbgfvds.cc/?target=-7EBNQCgQAAAcswQIDkZkABQEBEREKEQkKEQ1CEQ0SAAF_YWRjb21ibwEx&subacc=id01" class="btn btn-danger">PESAN SEKARANG</a>
+
+        <a id="ctaBtn" href="https://uh5f114a8buh.uewhbgfvds.cc/?target=-7EBNQCgQAAAcswQIDkZkABQEBEREKEQkKEQ1CEQ0SAAF_YWRjb21ibwEx" class="cta-button danger">PESAN SEKARANG</a>
     </center>
 
     <p class="lead text-center">GRATIS ONGKIR & BISA COD</p>
@@ -85,5 +85,33 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://beritapria.com/pixel/links_oles_quiz_id.js"></script>
+  <script>
+    // Ambil nilai subacc dari URL pengunjung
+    function getUrlParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Fungsi untuk mengganti atau menambahkan param
+    function replaceUrlParam(url, paramName, paramValue) {
+      var pattern = new RegExp('('+paramName+'=).*?(&|$)'),
+          newUrl = url.replace(pattern,'$1' + paramValue + '$2');
+      if ( newUrl == url ) {
+        newUrl = newUrl + (newUrl.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
+      }
+      return newUrl;
+    }
+
+    // Eksekusi saat halaman dibuka
+    const subacc = getUrlParam('subacc');
+    const button = document.getElementById('ctaBtn');
+    const targetUrl = "https://landingpageutama.com"; // Ganti ini dengan URL kamu
+
+    if (subacc) {
+      button.href = replaceUrlParam(targetUrl, 'subacc', subacc);
+    } else {
+      button.href = targetUrl;
+    }
+  </script>
 </html>
 
