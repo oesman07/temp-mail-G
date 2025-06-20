@@ -11,6 +11,8 @@
       font-family: 'Segoe UI', sans-serif;
       line-height: 1.7;
     }
+         header { background: #1f3d7a; color: white; padding: 20px; text-align: center; }
+
     .container {
       max-width: 800px;
     }
@@ -83,13 +85,31 @@
       font-size: 28px;
       z-index: 999;
     }
+     .floating-button {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff3333;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 16px;
+      z-index: 9999;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
   <!-- Fake Notif Box -->
   <div id="notif"></div>
-
+<header>
+  <h1>Rahasia Tahan Lama & Gagah Meski Usia di Atas 40</h1>
+  <p>Kembali Perkasa Tanpa Obat Kuat Kimia</p>
+</header>
 
 
   <div class="container py-4">
@@ -119,9 +139,11 @@
       <p>Produk yang saya temukan dari iklan Facebook dan setelah saya pelajari… banyak pria juga merasakan manfaatnya.</p>
 
       <ul>
-        <li>✅ Mengurangi frekuensi buang air kecil malam hari</li>
-        <li>✅ Menyehatkan prostat dari dalam</li>
         <li>✅ Mengembalikan gairah & stamina</li>
+        <li>✅ Merangsang produksi hormon pria dan meningkatkan potensi</li>
+        <li> ✅ Mengurangi frekuensi buang air kecil malam hari</li>
+        <li>✅ Menyehatkan prostat dari dalam</li>
+        <li>✅ Meredakan peradangan prostat dan gejalanya</li>
         <li>✅ 100% herbal – TANPA efek samping</li>
       </ul>
 
@@ -129,8 +151,8 @@
 
       <p>Setelah rutin konsumsi selama <strong>2 minggu</strong>, saya merasa perubahan besar:</p>
       <ul>
+        <li>✔ Durasi saat diranjang jadi lebih lama</li>
         <li>✔ Tidur lebih nyenyak</li>
-        <li>✔ Tidak bolak-balik ke toilet</li>
         <li>✔ Gairah kembali seperti dulu</li>
         <li>✔ Istri saya pun kembali hangat dan tersenyum</li>
       </ul>
@@ -138,7 +160,7 @@
       <p><strong>Pesan saya untuk Anda:</strong></p>
       <p><em>Jangan tunggu sampai istri Anda kecewa seperti istri saya dulu.</em><br>Pria sejati berani bertindak sebelum terlambat.</p>
       
-      <a id="ctaBtn" href="https://uh5f114a8buh.axdsz.pro/?target=-7EBNQCgQAAAcswQID25UABQEBEREKEQkKEQ1CEQ0SAAF_YWRjb21ibwEx&al=104071" class="cta-btn">Pesan Disini</a>
+      <a id="ctaBtn" href="https://uh81cfea97uh.axdsz.pro/?target=-7EBNQCgQAAAcbNgMD25UABQEBEREKEQkKEQ1CEQ0SAAF_YWRjb21ibwEx&al=104071" class="cta-btn">Pesan Disini</a>
 
 
       <p class="text-center mt-3" style="font-size: 14px; color: #777;">
@@ -197,7 +219,7 @@
 
     const subacc = getUrlParam('subacc');
     const button = document.getElementById('ctaBtn');
-    const targetUrl = "https://uh5f114a8buh.axdsz.pro/?target=-7EBNQCgQAAAcswQID25UABQEBEREKEQkKEQ1CEQ0SAAF_YWRjb21ibwEx&al=104071"; // Ganti ini dengan URL kamu
+    const targetUrl = "https://uh81cfea97uh.axdsz.pro/?target=-7EBNQCgQAAAcbNgMD25UABQEBEREKEQkKEQ1CEQ0SAAF_YWRjb21ibwEx&al=104071"; // Ganti ini dengan URL kamu
 
     if (subacc) {
       button.href = replaceUrlParam(targetUrl, 'subacc', subacc);
@@ -211,6 +233,7 @@
 
 
   </script>
+<a href="#ctaBtn" class="floating-button">Khusus Pria Dewasa</a>
 
 </body>
 </html>
